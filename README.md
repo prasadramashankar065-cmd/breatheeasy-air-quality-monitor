@@ -1,47 +1,49 @@
 # BreatheEasy — Air Quality Monitoring
 
-A Class 12 Informatics Practices project: a friendly dashboard for checking local air quality.
+A Class 12 Informatics Practices project: a friendly, location-based dashboard for exploring air quality.
 
 ## Run locally
 
 1. Install Python 3.9 or later.
-2. In this folder, run `python -m pip install -r requirements.txt`.
+2. Open a terminal in this folder and run `python -m pip install -r requirements.txt`.
 3. Run `python app.py`.
-4. Open http://127.0.0.1:5000 and choose **Use my location**, or search for a city.
+4. Open `http://127.0.0.1:5000` in a browser and choose **Use my location**. Allow location access when your browser asks.
+
+You can also search for a city to explore the dashboard without using device location.
 
 ## Share the live website
 
-1. Open **Settings → Pages** in this repository.
-2. Under **Build and deployment**, choose **Deploy from a branch**.
-3. Select **main** and **/(root)**, then save.
-4. GitHub will show the website link in the Pages section. The root page opens the dashboard in `static/index.html`.
-
-When the hosted page is used, the browser requests AQI data directly from Open-Meteo. If someone chooses **Use my location**, their coordinates are sent to Open-Meteo for that request. BreatheEasy does not save location history, and no API key is required.
+This repository includes a GitHub Pages entry point. After the project files are uploaded, open **Settings → Pages**, choose **Deploy from a branch**, select **main** and **/(root)**, then save. GitHub will show the shareable website address in that Pages section. The browser requests AQI and current weather data directly from Open-Meteo. If a visitor chooses **Use my location**, their coordinates are sent to Open-Meteo for those requests; BreatheEasy does not save location history.
 
 ## What it shows
 
-- US AQI, a plain-language category, and a friendly health tip
-- PM2.5, PM10, ozone, nitrogen dioxide, carbon monoxide, and sulphur dioxide
-- A short recent trend and an AQI guide
-- An automatic check for updates every 60 seconds
+- US AQI and a plain-language air-quality category
+- PM2.5, PM10, NO₂, O₃, CO, and SO₂
+- Current temperature, feels-like temperature, humidity, precipitation, wind speed, direction, and gusts
+- A short health suggestion and recent AQI trend
+- Automatic refresh every 60 seconds
 
-The provider's data may update less often than the dashboard checks, so the AQI can stay the same between updates.
+The refresh checks for newer information every minute. The source may update its underlying air-quality model less often, so the displayed AQI can stay the same between updates. Model estimates are not a substitute for readings from a nearby monitoring station.
 
-## Air quality guide
+## Project tools
 
-The US AQI ranges from 0 to 500: **Good** (0–50), **Moderate** (51–100), **Unhealthy for sensitive groups** (101–150), **Unhealthy** (151–200), **Very unhealthy** (201–300), and **Hazardous** (301+). These are categories for explaining the reading, not medical advice.
+- Python and Flask serve the app and retrieve the data.
+- HTML, CSS, and JavaScript create the dashboard and request location permission.
+- Open-Meteo Air Quality and Weather APIs supply the readings; no API key is needed for this school project.
 
-PM2.5 and PM10 are tiny airborne particles. Ozone (O3) can form near the ground when other pollutants react in sunlight. Nitrogen dioxide is commonly linked to fuel burning and traffic. Carbon monoxide and sulphur dioxide are gases associated with combustion and industry.
+The browser shares coordinates only after the user allows location access. The dashboard also works with a searched city. The project does not save location history.
 
-## Project tools and learning goals
+## Data and limitations
 
-- Python and Flask serve the local version and its AQI endpoint.
-- HTML, CSS, and JavaScript make the dashboard and request browser location permission.
-- Open-Meteo Air Quality API supplies the readings.
-- The project demonstrates API use, data presentation, charts, and privacy-aware location handling.
+Air-quality readings come from the [Open-Meteo Air Quality API](https://open-meteo.com/en/docs/air-quality-api), and weather readings come from the [Open-Meteo Weather API](https://open-meteo.com/en/docs). The page checks for updates every 60 seconds, but the provider's underlying models update less often. Values are model estimates and can differ from nearby monitoring stations. Do not use the dashboard as emergency or medical advice.
 
-Air-quality values are model estimates and can differ from nearby monitoring stations. Do not use this educational project as emergency or medical advice.
+## Project learning goals
+
+- Request data from a web API and display selected fields.
+- Use Python with Flask to provide a simple web service.
+- Present information with charts, categories, and clear labels.
+- Discuss data quality, location privacy, and the limits of model estimates.
 
 ## License
 
-MIT License. See [LICENSE](LICENSE).
+This project is shared under the MIT License. See [LICENSE](LICENSE).
